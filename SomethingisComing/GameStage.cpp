@@ -28,6 +28,7 @@ void GameStage::DrawStage(Camera camera, vec3 lightPos, unsigned int screenWidth
 	graphic->itgroundghost = graphic->_groundGhostList.begin();
 	graphic->itghost = graphic->_ghostList.begin();
 	buildStageDone = false;
+	int counterGroundGhost = 1;
 	while (!buildStageDone) {
 		if (graphic->itground != graphic->_groundList.end() 
 			|| graphic->itgroundghost != graphic->_groundGhostList.end()) {
@@ -36,6 +37,8 @@ void GameStage::DrawStage(Camera camera, vec3 lightPos, unsigned int screenWidth
 				graphic->posGround.x = 0;
 				counter = 0;
 				lengthCounter++;
+				counterGroundGhost++;
+				srand((unsigned int)time(NULL));
 				if (changeGround) {
 					limiterGround--;
 					if (lengthCounter >= numGround) {
@@ -57,6 +60,10 @@ void GameStage::DrawStage(Camera camera, vec3 lightPos, unsigned int screenWidth
 						lengthCounter = 0;
 					}
 				}
+				if (!changeGround) {
+					ghostGround.push_back(counterGroundGhost);
+					cout << counterGroundGhost << endl;
+				}
 			}
 			if ((changeGround && graphic->itground != graphic->_groundList.end()) || drawStageDone) {
 				graphic->itground->DrawObject(graphic->posGround, camera, lightPos, screenWidth, screenHeight);
@@ -64,26 +71,6 @@ void GameStage::DrawStage(Camera camera, vec3 lightPos, unsigned int screenWidth
 			}
 			if ((!changeGround && graphic->itgroundghost != graphic->_groundGhostList.end()) || drawStageDone) {
 				graphic->itgroundghost->DrawObject(graphic->posGround, camera, lightPos, screenWidth, screenHeight);
-				if (graphic->itghost != graphic->_ghostList.end()) {
-					int counter = 0;
-					int factor = 1;
-					for (; counter < 2 && graphic->itghost != graphic->_ghostList.end(); counter++) {
-						if (!drawStageDone) {
-							if (factor < 0) {
-								graphic->itghost->flipY();
-								//cout << graphic->itghost->defaultPos.x << "," << graphic->itghost->defaultPos.z << endl;
-							}
-							else {
-								//cout << graphic->itghost->defaultPos.x << "," << graphic->itghost->defaultPos.z << endl;
-							}
-							graphic->posGhost = graphic->itghost->defaultPos;
-							graphic->posGhost.z = graphic->posGround.z + (graphic->groundFactorz * factor / 4);
-						}
-						factor = -1;
-						graphic->itghost->DrawObject(graphic->posGhost, camera, lightPos, screenWidth, screenHeight);
-						++graphic->itghost;
-					}
-				}
 				++graphic->itgroundghost;
 			}
 			if (!drawStageDone) {
@@ -116,11 +103,33 @@ void GameStage::DrawStage(Camera camera, vec3 lightPos, unsigned int screenWidth
 			}
 			++graphic->ittree;
 		}
+		//harus dibenahi lebih lanjut
+		if (graphic->itghost != graphic->_ghostList.end()) {
+			int counter = 0;
+			int factor = 1;
+			for (; counter < 2 && graphic->itghost != graphic->_ghostList.end(); counter++) {
+				if (!drawStageDone) {
+					if (factor < 0) {
+						graphic->itghost->flipY();
+						//cout << graphic->itghost->defaultPos.x << "," << graphic->itghost->defaultPos.z << endl;
+					}
+					else {
+						//cout << graphic->itghost->defaultPos.x << "," << graphic->itghost->defaultPos.z << endl;
+					}
+					graphic->posGhost = graphic->itghost->defaultPos;
+					graphic->posGhost.z = graphic->posGround.z + (graphic->groundFactorz * factor / 4);
+				}
+				factor = -1;
+				graphic->itghost->DrawObject(graphic->posGhost, camera, lightPos, screenWidth, screenHeight);
+				++graphic->itghost;
+			}
+		}
 		if (
 			graphic->itground == graphic->_groundList.end()
 			&& graphic->itfence == graphic->_fenceList.end()
 			&& graphic->ittree == graphic->_treeList.end()
 			&& graphic->itgroundghost == graphic->_groundGhostList.end()
+			&& graphic->itghost == graphic->_ghostList.end()
 			) {
 			buildStageDone = true;
 		}
@@ -140,8 +149,8 @@ void GameStage::DrawStage(Camera camera, vec3 lightPos, unsigned int screenWidth
 void GameStage::Update(float deltaTime) {
 	graphic->chara.MoveCharacter(deltaTime);
 	graphic->itghost = graphic->_ghostList.begin();
-	/*while (graphic->itghost != graphic->_ghostList.end()) {
+	while (graphic->itghost != graphic->_ghostList.end()) {
 		graphic->itghost->MoveCharacter(deltaTime);
 		++graphic->itghost;
-	}*/
+	}
 }

@@ -293,9 +293,7 @@ void GraphicHandler::DrawObject(vec3 Position, Camera camera, vec3 lightPos, uns
 
 	glBindVertexArray(VAO);
 	TMatrix = translate(TMatrix, charPosition);
-	model = TMatrix 
-		* RMatrix 
-		* SMatrix;
+	model = TMatrix * RMatrix * SMatrix;
 	
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 	glDrawArrays(GL_TRIANGLES, 0, verticesObject.size());

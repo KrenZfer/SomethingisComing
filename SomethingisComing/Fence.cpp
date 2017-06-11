@@ -5,7 +5,7 @@ Fence::Fence(){}
 Fence::~Fence(){}
 
 void Fence::BuildObject() {
-	graphHandler.BuildObject("object.vert", "object.frag", "fence.obj", "fence.png");
+	graphHandler.BuildObject("object.vert", "object.frag", "Objek/fence.obj", "Objek/fence.png");
 	this->VAOChar = graphHandler.VAO;
 	this->shaderChar = graphHandler.shader;
 }

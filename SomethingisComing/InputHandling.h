@@ -59,6 +59,7 @@ private:
 	unordered_map<unsigned int, bool> _keyMap;
 	unordered_map<unsigned int, bool> _previousKeyMap;
 	vec2 _mouseCoords;
+	bool keyOnce;
 };
 
 #endif // !_H_INPUT_HANDLING_H_

@@ -17,7 +17,7 @@ Tree::~Tree(){
 }
 
 void Tree::BuildObject() {
-	graphHandler.BuildObject("object.vert", "object.frag", "tree.obj", "tree.png");
+	graphHandler.BuildObject("object.vert", "object.frag", "Objek/tree.obj", "Objek/tree.png");
 	this->VAOChar = graphHandler.VAO;
 	this->shaderChar = graphHandler.shader;
 }

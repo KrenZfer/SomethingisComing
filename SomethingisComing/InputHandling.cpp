@@ -43,7 +43,9 @@ void InputHandling::PressKey(unsigned int keyID) {
 	// Here we are treating _keyMap as an associative array.
 	// if keyID doesn't already exist in _keyMap, it will get added
 	_keyMap[keyID] = true;
-	cout << "ID : " << keyID << endl;
+	//cout << "ID : " << keyID << endl;
+	/*SDL_Delay(200);
+	_keyMap[keyID] = false;*/
 }
 
 void InputHandling::ReleaseKey(unsigned int keyID) {

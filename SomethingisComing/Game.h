@@ -72,6 +72,7 @@ namespace Engine {
 	private:
 		unsigned int lastFrame = 0, last = 0, _fps = 0, fps = 0;
 		float targetFrameTime = 0, timeScale;
+		bool keyOnce;
 		//list<int> releasePtr;
 		State state;
 		float GetDeltaTime();

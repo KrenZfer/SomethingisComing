@@ -1,7 +1,7 @@
 #ifndef _GAME_STAGE_
 #define _GAME_STAGE_
 
-#include <thread>
+#include <time.h>
 #include "Tree.h"
 #include "Ground.h"
 #include "Fence.h"
@@ -21,6 +21,7 @@ public:
 	vec3 posTree;
 	vec3 posChara;
 	vec3 posGhost;
+	list<int> ghostGround;
 	bool buildStageDone;
 	bool drawStageDone;
 	bool drawCharacter;

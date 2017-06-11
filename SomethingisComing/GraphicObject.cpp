@@ -1,9 +1,9 @@
 #include "GraphicObject.h"
 
-GraphicObject::GraphicObject() : chara(Character("chr_man.obj","chr_man.png"))
+GraphicObject::GraphicObject() : chara(Character("Objek/chr_man.obj","Objek/chr_man.png"))
 {
 	Init();
-	lengthPlatform = vec2(2.0f, 16.0f);
+	lengthPlatform = vec2(2.0f, 10.0f);
 	groundFactorx = 50;
 	groundFactorz = 25;
 	buildStageDone = false;
@@ -11,14 +11,16 @@ GraphicObject::GraphicObject() : chara(Character("chr_man.obj","chr_man.png"))
 	_groundList = vector<Ground>(
 		static_cast<unsigned int>(
 			lengthPlatform.x*lengthPlatform.y/2), 
-			Ground("platform.obj","platform.png"));
+			Ground("Objek/platform.obj","Objek/platform.png"));
 	_groundGhostList = vector<Ground>(
 		static_cast<unsigned int>(
 			lengthPlatform.x*lengthPlatform.y / 2),
-		Ground("platformghost.obj", "platformghost.png"));
+		Ground("Objek/platformghost.obj", "Objek/platformghost.png"));
 	_fenceList = vector<Fence>(static_cast<unsigned int>(lengthPlatform.y + 2));
 	_treeList = vector<Tree>(static_cast<unsigned int>(3));
-	_ghostList = vector<Ghost>(static_cast<unsigned int>(2), Ghost("ghost.obj","ghost.png"));
+	_ghostList = vector<Ghost>(static_cast<unsigned int>(1
+		//_groundGhostList.size()*5
+		), Ghost("Objek/ghost.obj","Objek/ghost.png"));
 	itground = _groundList.begin();
 	itfence = _fenceList.begin();
 	ittree = _treeList.begin();

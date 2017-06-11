@@ -1,7 +1,7 @@
 #include "Demo.h"
 
 Demo::Demo()
-	: cameraPos(-11.0f, 33.0f, -20.0f)
+	: cameraPos(-11.0f, 33.0f, 0.0f)
 	, cameraEye(0.0f, 1.0f, 0.0f)
 	, yaw(-298)
 	, pitch(-44)
@@ -40,7 +40,6 @@ void Demo::Init()
 	yaw = camera.Yaw;
 	pitch = camera.Pitch;
 	color = vec3(0.3f, 0.8f, 0.7f);
-	mode = true;
 }
 
 void Demo::Update(float deltaTime)
@@ -61,6 +60,7 @@ void Demo::Render()
 
 	//DrawSprite();
 	stage.DrawStage(camera, lightPos, screenWidth, screenHeight);
+	mode = true;
 	//chara.DrawObject(vec3(0.0f), camera, lightPos, screenWidth, screenHeight);
 }
 

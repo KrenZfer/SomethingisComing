@@ -86,7 +86,7 @@ void Engine::Game::Start(string windowTitle, unsigned int screenWidth, unsigned 
 
 	// Init delta time calculation
 	last = SDL_GetTicks();
-
+	//keyOnce = false;
 	Init();
 
 	//Will loop until we set _gameState to EXIT
@@ -375,10 +375,15 @@ void Engine::Game::PollInput()
 			state = State::EXIT;
 			break;
 		case SDL_KEYDOWN:
+			//if (!keyOnce) {
 			handling->PressKey(evt.key.keysym.sym);
+				//cout << "lll" << endl;
+			//}
+			//handling->ReleaseKey(evt.key.keysym.sym);
 			break;
 		case SDL_KEYUP:
 			handling->ReleaseKey(evt.key.keysym.sym);
+			//keyOnce = true;
 			break;
 		case SDL_JOYAXISMOTION:
 			handling->onEventAxis(evt.jaxis.axis, evt.jaxis.value);
