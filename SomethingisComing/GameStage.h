@@ -21,12 +21,20 @@ public:
 	vec3 posTree;
 	vec3 posChara;
 	vec3 posGhost;
-	list<int> ghostGround;
+	vector<int> spookyGround;
+	vector<int> ordinaryGround;
 	bool buildStageDone;
 	bool drawStageDone;
 	bool drawCharacter;
 	bool changeGround;
+
+	int counterSummon;
+	int numDefTree;
+
+	vector<int>::iterator itordinary;
+	vector<int>::iterator itspooky;
 	
+
 	void DrawStage(Camera camera, vec3 lightPos, unsigned int screenWidth, unsigned int screenHeight);
 	void Update(float deltaTime);
 };

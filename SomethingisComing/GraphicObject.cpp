@@ -17,10 +17,11 @@ GraphicObject::GraphicObject() : chara(Character("Objek/chr_man.obj","Objek/chr_
 			lengthPlatform.x*lengthPlatform.y / 2),
 		Ground("Objek/platformghost.obj", "Objek/platformghost.png"));
 	_fenceList = vector<Fence>(static_cast<unsigned int>(lengthPlatform.y + 2));
-	_treeList = vector<Tree>(static_cast<unsigned int>(3));
+	_treeList = vector<Tree>(static_cast<unsigned int>(_groundList.size()*3));
 	_ghostList = vector<Ghost>(static_cast<unsigned int>(1
 		//_groundGhostList.size()*5
 		), Ghost("Objek/ghost.obj","Objek/ghost.png"));
+	_summonHelper = vector<SummonHelper>(_groundGhostList.size());
 	itground = _groundList.begin();
 	itfence = _fenceList.begin();
 	ittree = _treeList.begin();
@@ -75,7 +76,7 @@ void GraphicObject::BuildObjects() {
 			) {
 			buildStageDone = true;
 		}
-		percentComplete += ((float)(1.0f / (lengthPlatform.x*lengthPlatform.y) * 100));
+		percentComplete += ((float)(1.0f / _ghostList.size() * 100));
 		cout << "Loading " << percentComplete << "%" << endl;
 	}
 	buildStageDone = false;
@@ -96,17 +97,17 @@ int GraphicObject::Collision(void *ptr) {
 			<= (chara.radius + ittree->radius)
 			)) {
 			if (chara.charPosition.x < ittree->charPosition.x) {
-				chara.xpos = -1;
+				chara.xpos = -0.1f;
 			}
 			else {
-				chara.xpos = 1;
+				chara.xpos = 0.1f;
 			}
-			if (chara.charPosition.z < ittree->charPosition.z) {
-				chara.zpos = -1;
+			/*if (chara.charPosition.z < ittree->charPosition.z) {
+				chara.zpos = -0.1f;
 			}
 			else {
-				chara.zpos = 1;
-			}
+				chara.zpos = 0.1;
+			}*/
 		}
 		ittree++;
 	}

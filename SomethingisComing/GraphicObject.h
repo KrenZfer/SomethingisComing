@@ -6,6 +6,7 @@
 #include "Fence.h"
 #include "Character.h"
 #include "Ghost.h"
+#include "SummonHelper.h"
 
 class GraphicObject {
 
@@ -31,6 +32,7 @@ public:
 	vector<Fence> _fenceList;
 	vector<Tree> _treeList;
 	vector<Ghost> _ghostList;
+	vector<SummonHelper> _summonHelper;
 	Character chara;
 
 	vec3 posGround;
@@ -52,6 +54,7 @@ public:
 	vector<Tree>::iterator ittree;
 	vector<Ground>::iterator itgroundghost;
 	vector<Ghost>::iterator itghost;
+	vector<SummonHelper>::iterator itsummon;
 
 	void setGrounds(vector<Ground> groundList) { _groundList = groundList; }
 	void setFences(vector<Fence> fenceList) { _fenceList = fenceList; }

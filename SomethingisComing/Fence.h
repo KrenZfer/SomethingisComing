@@ -20,6 +20,8 @@ public:
 	Fence();
 	~Fence();
 
+	vec3 pos;
+
 	void BuildObject();
 	void DrawObject(vec3 Position, Camera camera, vec3 lightPos, unsigned int screenWidthchar, unsigned int screenHeightchar);
 	void UpdateObject(Camera camera, vec3 lightPos);

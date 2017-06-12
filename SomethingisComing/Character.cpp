@@ -7,7 +7,7 @@ Character::Character(char* pathObj, char* pathMaterial)
 	this->pathObj = pathObj;
 	this->pathMaterial = pathMaterial;
 	walk = false;
-	radius = 3.0f;
+	radius = 1.0f;
 	defaultPos = vec3(0.0f,2.0f,20.0f);
 	charPosition = defaultPos;
 }

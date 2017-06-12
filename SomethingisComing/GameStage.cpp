@@ -4,10 +4,13 @@ GameStage::GameStage()
 {
 	buildStageDone = false;
 	drawStageDone = false;
-	drawCharacter = false;
 	changeGround = true;
 	graphic = GraphicObject::getInstance();
 	posChara = graphic->chara.defaultPos;
+	counterSummon = 0;
+	numDefTree = 0;
+	graphic->posTree.z = 10.0f;
+	graphic->posTree.x = 0.0f;
 }
 
 GameStage::~GameStage() {
@@ -27,9 +30,11 @@ void GameStage::DrawStage(Camera camera, vec3 lightPos, unsigned int screenWidth
 	graphic->ittree = graphic->_treeList.begin();
 	graphic->itgroundghost = graphic->_groundGhostList.begin();
 	graphic->itghost = graphic->_ghostList.begin();
+	//graphic->itsummon = graphic->_summonHelper.begin();
 	buildStageDone = false;
-	int counterGroundGhost = 1;
+	int counterGround = 0;
 	while (!buildStageDone) {
+		counterSummon++;
 		if (graphic->itground != graphic->_groundList.end() 
 			|| graphic->itgroundghost != graphic->_groundGhostList.end()) {
 			if (counter >= graphic->lengthPlatform.x && !drawStageDone) {
@@ -37,7 +42,7 @@ void GameStage::DrawStage(Camera camera, vec3 lightPos, unsigned int screenWidth
 				graphic->posGround.x = 0;
 				counter = 0;
 				lengthCounter++;
-				counterGroundGhost++;
+				counterGround++;
 				srand((unsigned int)time(NULL));
 				if (changeGround) {
 					limiterGround--;
@@ -61,9 +66,13 @@ void GameStage::DrawStage(Camera camera, vec3 lightPos, unsigned int screenWidth
 					}
 				}
 				if (!changeGround) {
-					ghostGround.push_back(counterGroundGhost);
-					cout << counterGroundGhost << endl;
+					spookyGround.push_back(counterGround);
 				}
+				else {
+					cout << counterGround << endl;
+					ordinaryGround.push_back(counterGround);
+				}
+				itordinary = ordinaryGround.begin();
 			}
 			if ((changeGround && graphic->itground != graphic->_groundList.end()) || drawStageDone) {
 				graphic->itground->DrawObject(graphic->posGround, camera, lightPos, screenWidth, screenHeight);
@@ -82,54 +91,39 @@ void GameStage::DrawStage(Camera camera, vec3 lightPos, unsigned int screenWidth
 			if (counterFence >= 2 && !drawStageDone) {
 				graphic->posFence.z += graphic->groundFactorx;
 				graphic->posFence.x = -static_cast<float>(graphic->groundFactorz);
-				graphic->itfence->charPosition.x = graphic->posFence.x;
-				graphic->itfence->charPosition.z = graphic->posFence.z;
 				counterFence = 0;
 			}
 			graphic->itfence->DrawObject(graphic->posFence, camera, lightPos, screenWidth, screenHeight);
 			if (!drawStageDone) {
 				graphic->posFence.x += (graphic->lengthPlatform.x*graphic->groundFactorx);
-				graphic->itfence->charPosition.x = graphic->posFence.x;
 				counterFence++;
 			}
 			++graphic->itfence;
 		}
-		if (graphic->ittree != graphic->_treeList.end()) {
-			if (!drawStageDone) {
-				graphic->ittree->DrawObject(graphic->ittree->charPosition, camera, lightPos, screenWidth, screenHeight);
+		if (graphic->ittree != graphic->_treeList.end() && graphic->itground == graphic->_groundList.end()) {
+			numDefTree += 5;
+			if (counterTree >=6 && !drawStageDone && itordinary != ordinaryGround.end()) {
+				graphic->posTree.z = static_cast<float>((*itordinary) * graphic->groundFactorz) - 10;
+				graphic->posTree.x = -10;
+				counterTree = 0;
+				numDefTree = 0;
+				++itordinary;
 			}
-			else {
-				graphic->ittree->DrawObject(graphic->posTree, camera, lightPos, screenWidth, screenHeight);
+			graphic->ittree->DrawObject(graphic->posTree, camera, lightPos, screenWidth, screenHeight);
+			if (!drawStageDone) {
+				srand((unsigned int)counterSummon);
+				graphic->posTree.z += (rand() % 20);
+				graphic->posTree.x += (rand() % (40 - numDefTree)) + (numDefTree/5);
+				counterTree++;
 			}
 			++graphic->ittree;
-		}
-		//harus dibenahi lebih lanjut
-		if (graphic->itghost != graphic->_ghostList.end()) {
-			int counter = 0;
-			int factor = 1;
-			for (; counter < 2 && graphic->itghost != graphic->_ghostList.end(); counter++) {
-				if (!drawStageDone) {
-					if (factor < 0) {
-						graphic->itghost->flipY();
-						//cout << graphic->itghost->defaultPos.x << "," << graphic->itghost->defaultPos.z << endl;
-					}
-					else {
-						//cout << graphic->itghost->defaultPos.x << "," << graphic->itghost->defaultPos.z << endl;
-					}
-					graphic->posGhost = graphic->itghost->defaultPos;
-					graphic->posGhost.z = graphic->posGround.z + (graphic->groundFactorz * factor / 4);
-				}
-				factor = -1;
-				graphic->itghost->DrawObject(graphic->posGhost, camera, lightPos, screenWidth, screenHeight);
-				++graphic->itghost;
-			}
 		}
 		if (
 			graphic->itground == graphic->_groundList.end()
 			&& graphic->itfence == graphic->_fenceList.end()
 			&& graphic->ittree == graphic->_treeList.end()
 			&& graphic->itgroundghost == graphic->_groundGhostList.end()
-			&& graphic->itghost == graphic->_ghostList.end()
+			//&& graphic->itghost == graphic->_ghostList.end()
 			) {
 			buildStageDone = true;
 		}
@@ -137,7 +131,6 @@ void GameStage::DrawStage(Camera camera, vec3 lightPos, unsigned int screenWidth
 
 	graphic->chara.DrawObject(posChara, camera, lightPos, screenWidth, screenHeight);
 
-	drawCharacter = true;
 	drawStageDone = true;
 	graphic->posGround = vec3(0.0f);
 	graphic->posFence = vec3(0.0f);

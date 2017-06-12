@@ -9,8 +9,9 @@ Tree::Tree(char* pathObj, char* pathMaterial) {
 	this->graphHandler = GraphicHandler();
 	this->pathObj = pathObj;
 	this->pathMaterial = pathMaterial;
-	this->radius = 3.0f;
+	this->radius = 1.0f;
 	once = false;
+	pos = vec3(0.0f, 2.0f, 0.0f);
 }
 
 Tree::~Tree(){
@@ -31,6 +32,7 @@ void Tree::DrawObject(vec3 Position, Camera camera, vec3 lightPos, unsigned int 
 	this->screenWidth = screenWidthchar;
 	graphHandler.DrawObject(pos, this->cameraChar, this->lightPosChar, this->screenWidth, this->screenHeight);
 	once = true;
+	pos = vec3(0.0f);
 }
 
 void Tree::UpdateObject(Camera camera, vec3 lightPos){}
