@@ -1,6 +1,6 @@
 #include "GraphicObject.h"
 
-GraphicObject::GraphicObject() : chara(Character("Objek/chr_man.obj","Objek/chr_man.png"))
+GraphicObject::GraphicObject() : chara(Character("Objek/chr_man.objek","Objek/chr_man.png"))
 {
 	Init();
 	lengthPlatform = vec2(2.0f, 10.0f);
@@ -11,16 +11,16 @@ GraphicObject::GraphicObject() : chara(Character("Objek/chr_man.obj","Objek/chr_
 	_groundList = vector<Ground>(
 		static_cast<unsigned int>(
 			lengthPlatform.x*lengthPlatform.y/2), 
-			Ground("Objek/platform.obj","Objek/platform.png"));
+			Ground("Objek/platform.objek","Objek/platform.png"));
 	_groundGhostList = vector<Ground>(
 		static_cast<unsigned int>(
 			lengthPlatform.x*lengthPlatform.y / 2),
-		Ground("Objek/platformghost.obj", "Objek/platformghost.png"));
+		Ground("Objek/platformghost.objek", "Objek/platformghost.png"));
 	_fenceList = vector<Fence>(static_cast<unsigned int>(lengthPlatform.y + 2));
 	_treeList = vector<Tree>(static_cast<unsigned int>(_groundList.size()*3));
 	_ghostList = vector<Ghost>(static_cast<unsigned int>(1
 		//_groundGhostList.size()*5
-		), Ghost("Objek/ghost.obj","Objek/ghost.png"));
+		), Ghost("Objek/ghost.objek","Objek/ghost.png"));
 	_summonHelper = vector<SummonHelper>(_groundGhostList.size());
 	itground = _groundList.begin();
 	itfence = _fenceList.begin();
