@@ -91,29 +91,29 @@ void Demo::MoveSprite(float deltaTime)
 {
 	if ((handling->IsKeyPressed(AXIS_X_LEFT)
 		|| handling->IsKeyPressed(SDLK_a))
-		&& cameraPos.x <= 21
+		//&& cameraPos.x <= 21
 		) {
 		xpos += (SPEED / 2);
 		xposlight += (SPEED / 2);
 	}
 	if ((handling->IsKeyPressed(AXIS_X_RIGHT)
 		|| handling->IsKeyPressed(SDLK_d)) 
-		&& cameraPos.x >= -11
+		//&& cameraPos.x >= -11
 		) {
 		xpos -= (SPEED / 2);
 		xposlight -= (SPEED / 2);
 	}
 	if ((handling->IsKeyPressed(AXIS_Y_UP)
 		|| handling->IsKeyPressed(SDLK_w)) 
-		&& false
+		//&& false
 		) {
 		zpos += (SPEED/2);
 		zposlight += (SPEED / 2);
 	}
 	if ((handling->IsKeyPressed(AXIS_Y_DOWN)
 		|| handling->IsKeyPressed(SDLK_s))
-		&& cameraPos.z >= 0
-		&& false
+		//&& cameraPos.z >= 0
+		//&& false
 		) {
 		zpos -= (SPEED/2);
 		zposlight -= (SPEED / 2);
@@ -141,10 +141,10 @@ void Demo::MoveSprite(float deltaTime)
 	if (handling->IsKeyPressed(BTN_TRIANGLE)) {
 		cout << xpos << ", " << ypos << ", " << zpos << ", " << yaw << ", " << pitch << endl;
 	}
-	if (mode) {
+	/*if (mode) {
 		zpos += deltaTime * (0.002f);
 		zposlight += deltaTime * (0.002f);
-	}
+	}*/
 		cameraPos.z = zpos;
 		cameraPos.x = xpos;
 		//cameraPos.y = ypos;
@@ -183,7 +183,6 @@ void Demo::DrawSprite() {
 	glBindVertexArray(0);
 
 }
-
 
 void Demo::BuildSprite()
 {

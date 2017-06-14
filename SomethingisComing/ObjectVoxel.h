@@ -4,11 +4,12 @@
 #include "Game.h"
 #include "Camera.h"
 #include "GraphicHandler.h"
-#include <SOIL.h>
-#include <SDL.h>
+#include <SOIL/SOIL.h>
+#include <SDL/SDL.h>
 #include <string>
-#include <glm.hpp>
-#include <gtc/matrix_transform.hpp>
+#include <GLM/glm.hpp>
+#include <GLM/gtc/matrix_transform.hpp>
+#include <vector>
 
 using namespace glm;
 

@@ -14,9 +14,11 @@ public:
 
 	vec3 pos;
 	vec3 defaultPos;
+	vec3 currentPos;
 	vec3 forward;
 	vec3 tempPos;
 	float rotate;
+	bool summon;
 
 	void BuildObject();
 	void DrawObject(vec3 Position, Camera camera, vec3 lightPos, unsigned int screenWidthchar, unsigned int screenHeightchar);

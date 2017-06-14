@@ -1,11 +1,11 @@
 #ifndef _GRAPHIC_HANDLER_
 #define _GRAPHIC_HANDLER_
 
-#include <SDL.h>
-#include <SOIL.h>
-#include <glm.hpp>
-#include <gtc/type_ptr.hpp>
-#include <gtc/matrix_transform.hpp>
+#include <SDL/SDL.h>
+#include <SOIL/SOIL.h>
+#include <GLM/glm.hpp>
+#include <GLM/gtc/type_ptr.hpp>
+#include <GLM/gtc/matrix_transform.hpp>
 #include <vector>
 #include <iostream>
 #include <fstream>

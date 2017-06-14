@@ -1,16 +1,16 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include <GL/glew.h>
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <glm.hpp>
-#include <gtc/matrix_transform.hpp>
-#include <gtc/type_ptr.hpp>
-#include <gtx/vector_angle.hpp>
+#include <GLM/glm.hpp>
+#include <GLM/gtc/matrix_transform.hpp>
+#include <GLM/gtc/type_ptr.hpp>
+#include <GLM/gtx/vector_angle.hpp>
 #include <unordered_map>
 
 #include "InputHandling.h"

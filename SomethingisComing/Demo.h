@@ -2,13 +2,13 @@
 #define DEMO_H
 
 
-#include <SOIL.h>
+#include <SOIL/SOIL.h>
 
-#include <glm.hpp>
-#include <gtc/matrix_transform.hpp>
-#include <gtc/type_ptr.hpp>
+#include <GLM/glm.hpp>
+#include <GLM/gtc/matrix_transform.hpp>
+#include <GLM/gtc/type_ptr.hpp>
 #include <string>
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 #include "Game.h"
 #include "Camera.h"

@@ -1,16 +1,8 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
-#include "Game.h"
-#include "Camera.h"
-#include "GraphicHandler.h"
 #include "ObjectVoxel.h"
 #include "InputHandling.h"
-#include <SOIL.h>
-#include <SDL.h>
-#include <string>
-#include <glm.hpp>
-#include <gtc/matrix_transform.hpp>
 
 using namespace glm;
 

@@ -60,6 +60,9 @@
     <ClInclude Include="SummonHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TextsHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Character.cpp">

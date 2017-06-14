@@ -7,7 +7,9 @@ Ghost::Ghost(char* pathObject, char* pathMaterial) {
 	graphHandler = GraphicHandler();
 	defaultPos = vec3(100.0f, 2.0f, 0.0f);
 	pos = defaultPos;
+	currentPos = defaultPos;
 	forward = vec3(-1.0f, 0.0f, 0.0f);
+	summon = false;
 }
 
 Ghost::~Ghost(){}
@@ -22,7 +24,7 @@ void Ghost::DrawObject(vec3 Position, Camera camera, vec3 lightPos, unsigned int
 	this->cameraChar = camera;
 	this->pos = Position;
 	this->pos += tempPos;
-	this->defaultPos += pos;
+	this->currentPos += pos;
 	this->lightPosChar = lightPos;
 	this->screenWidth = screenWidthchar;
 	this->screenHeight = screenHeightchar;
@@ -30,7 +32,14 @@ void Ghost::DrawObject(vec3 Position, Camera camera, vec3 lightPos, unsigned int
 }
 
 void Ghost::MoveCharacter(float deltaTime) {
-	tempPos += forward * 0.0007f;
+	if (summon) {
+		tempPos += forward * 0.0007f;
+	}
+	if (summon && tempPos.x == 130) {
+		summon = false;
+		tempPos = vec3(0.0f);
+		currentPos = defaultPos;
+	}
 }
 
 void Ghost::flipY() {

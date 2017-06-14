@@ -88,37 +88,42 @@ void GraphicObject::BuildObjects() {
 }
 int GraphicObject::Collision(void *ptr) {
 	ittree = _treeList.begin();
-	
-	while (ittree != _treeList.end()) {
-		if ((SDL_sqrtf(
-			powf(chara.charPosition.x - ittree->charPosition.x, 2)
-			+ powf(chara.charPosition.z - ittree->charPosition.z, 2)
-		)
-			<= (chara.radius + ittree->radius)
-			)) {
-			if (chara.charPosition.x < ittree->charPosition.x) {
-				chara.xpos = -0.1f;
+	bool checkCollision = false;
+	while (!checkCollision) {
+		if (ittree != _treeList.end()) {
+			if ((SDL_sqrtf(
+				powf(chara.charPosition.x - ittree->charPosition.x, 2)
+				+ powf(chara.charPosition.z - ittree->charPosition.z, 2)
+			)
+				<= (chara.radius + ittree->radius)
+				)) {
+				if (chara.charPosition.x < ittree->charPosition.x) {
+					chara.xpos = -1;
+				}
+				else {
+					chara.xpos = 1;
+				}
+				if (chara.charPosition.z < ittree->charPosition.z) {
+					chara.zpos = -1;
+				}
+				else {
+					chara.zpos = 1;
+				}
 			}
-			else {
-				chara.xpos = 0.1f;
-			}
-			/*if (chara.charPosition.z < ittree->charPosition.z) {
-				chara.zpos = -0.1f;
-			}
-			else {
-				chara.zpos = 0.1;
-			}*/
+			ittree++;
 		}
-		ittree++;
+		if (ittree == _treeList.end()) {
+			checkCollision = true;
+		}
 	}
 	if ((chara.charPosition.x <= -groundFactorx / 2 + 2
 			|| chara.charPosition.x >= groundFactorx*lengthPlatform.x - groundFactorx / 2 - 2)
 		) {
 		if (chara.charPosition.x < 0) {
-			chara.xpos = 0.1f;
+			chara.xpos = 1;
 		}
 		else {
-			chara.xpos = -0.1f;
+			chara.xpos = -1;
 		}
 	}
 	return 0;

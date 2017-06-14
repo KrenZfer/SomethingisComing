@@ -2,7 +2,7 @@
 #ifndef _H_INPUT_HANDLING_H_
 #define _H_INPUT_HANDLING_H_
 
-#include <glm.hpp>
+#include <GLM/glm.hpp>
 #include <unordered_map>
 #include <iostream>
 

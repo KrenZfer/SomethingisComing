@@ -2,9 +2,6 @@
 #define _TREE_H
 
 #include "ObjectVoxel.h"
-#include "Camera.h"
-#include <glm.hpp>
-#include <vector>
 
 using namespace glm;
 
