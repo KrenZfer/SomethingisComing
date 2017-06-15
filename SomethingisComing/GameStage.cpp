@@ -130,7 +130,7 @@ void GameStage::DrawStage(Camera camera, vec3 lightPos, unsigned int screenWidth
 	}
 
 	graphic->chara.DrawObject(posChara, camera, lightPos, screenWidth, screenHeight);
-
+	//cout << "ScreenWidth : " << static_cast<int>(screenWidth) << " sreenHeight : " << static_cast<int>(screenHeight) << endl;
 	drawStageDone = true;
 	graphic->posGround = vec3(0.0f);
 	graphic->posFence = vec3(0.0f);

@@ -286,6 +286,7 @@ void GraphicHandler::DrawObject(vec3 Position, Camera camera, vec3 lightPos, uns
 
 	view = this->camera.GetViewMatrix();
 	projection = perspective(this->camera.Zoom, (GLfloat)this->screenWidth / (GLfloat)this->screenHeight, 0.1f, 1000.0f);
+	//cout << (int)this->screenWidth << " : " << (int)this->screenHeight << endl;
 
 	glUniform3fv(light_positionLoc, 1, glm::value_ptr(this->lightPos));
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));

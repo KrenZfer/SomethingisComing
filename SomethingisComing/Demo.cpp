@@ -4,7 +4,7 @@ Demo::Demo()
 	: graphicObjects(GraphicObject::getInstance())
 	, gsm(GameStateManager())
 {
-
+	gsm.push(new PlayState(&gsm));
 }
 
 GraphicObject * GraphicObject::_instance;
@@ -20,22 +20,19 @@ void Demo::Init()
 	graphicObjects->BuildObjects();
 	gsm.screenWidth = screenWidth;
 	gsm.screenHeight = screenHeight;
-	gsm.push(new PlayState(&gsm));
 	gsm.Init();
-	//playstate.Init(screenWidth, screenHeight);
 }
 
 void Demo::Update(float deltaTime)
 {
 	gsm.Update(deltaTime);
-	//playstate.Update(deltaTime);
 }
 
 void Demo::Render()
 {
 	//Clear the color and depth buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//playstate.Render();
+
 	gsm.Render();
 }
 
