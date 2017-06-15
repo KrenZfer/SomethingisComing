@@ -12,7 +12,6 @@
 
 #include "GraphicObject.h"
 #include "GameStateManager.h"
-#include "State.h"
 #include "PlayState.h"
 
 using namespace glm;
@@ -30,7 +29,6 @@ private:
 	GameStateManager gsm;
 	//singleton pointer
 	GraphicObject * graphicObjects;
-	PlayState playstate;
 };
 #endif
 

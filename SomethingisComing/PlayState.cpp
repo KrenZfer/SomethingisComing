@@ -1,6 +1,7 @@
 #include "PlayState.h"
+#include "GameStateManager.h"
 
-PlayState::PlayState() 
+PlayState::PlayState(GameStateManager * gsm) 
 	: cameraPos(-11.0f, 33.0f, 0.0f)
 	, cameraEye(0.0f, 1.0f, 0.0f)
 	, yaw(-298)
@@ -9,7 +10,7 @@ PlayState::PlayState()
 	, stage(GameStage())
 	, graphicObjects(GraphicObject::getInstance())
 	, textHandler(TextstHandler())
-	, State()
+	, State(gsm)
 {
 	handling = InputHandling::getInstance();
 }
@@ -73,29 +74,29 @@ void PlayState::MoveSprite(float deltaTime)
 {
 	if ((handling->IsKeyPressed(AXIS_X_LEFT)
 		|| handling->IsKeyPressed(SDLK_a))
-		//&& cameraPos.x <= 21
+		&& cameraPos.x <= 21
 		) {
 		xpos += (SPEED / 2);
 		xposlight += (SPEED / 2);
 	}
 	if ((handling->IsKeyPressed(AXIS_X_RIGHT)
 		|| handling->IsKeyPressed(SDLK_d))
-		//&& cameraPos.x >= -11
+		&& cameraPos.x >= -11
 		) {
 		xpos -= (SPEED / 2);
 		xposlight -= (SPEED / 2);
 	}
 	if ((handling->IsKeyPressed(AXIS_Y_UP)
 		|| handling->IsKeyPressed(SDLK_w))
-		//&& false
+		&& false
 		) {
 		zpos += (SPEED / 2);
 		zposlight += (SPEED / 2);
 	}
 	if ((handling->IsKeyPressed(AXIS_Y_DOWN)
 		|| handling->IsKeyPressed(SDLK_s))
-		//&& cameraPos.z >= 0
-		//&& false
+		&& cameraPos.z >= 0
+		&& false
 		) {
 		zpos -= (SPEED / 2);
 		zposlight -= (SPEED / 2);
@@ -123,10 +124,10 @@ void PlayState::MoveSprite(float deltaTime)
 	if (handling->IsKeyPressed(BTN_TRIANGLE)) {
 		cout << xpos << ", " << ypos << ", " << zpos << ", " << yaw << ", " << pitch << endl;
 	}
-	/*if (mode) {
+	if (mode) {
 	zpos += deltaTime * (0.002f);
 	zposlight += deltaTime * (0.002f);
-	}*/
+	}
 	cameraPos.z = zpos;
 	cameraPos.x = xpos;
 	//cameraPos.y = ypos;

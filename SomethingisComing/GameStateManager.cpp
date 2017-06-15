@@ -1,4 +1,5 @@
 #include "GameStateManager.h"
+#include "State.h"
 
 GameStateManager::GameStateManager() {
 	states = vector<unique_ptr<State>>();
@@ -19,7 +20,6 @@ void GameStateManager::set(State* state) {
 }
 
 void GameStateManager::Init() {
-	//states.back().get()->Init(screenWidth, screenHeight);
 	states.back().get()->Init(screenWidth, screenHeight);
 }
 

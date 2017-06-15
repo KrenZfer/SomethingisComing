@@ -10,7 +10,7 @@ class PlayState
 	: public State {
 
 public:
-	PlayState();
+	PlayState(GameStateManager * gsm);
 	~PlayState();
 
 	virtual void Init(unsigned int screenWidth, unsigned int screenHeight);

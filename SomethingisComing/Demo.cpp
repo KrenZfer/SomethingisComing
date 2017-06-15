@@ -3,7 +3,6 @@
 Demo::Demo() 
 	: graphicObjects(GraphicObject::getInstance())
 	, gsm(GameStateManager())
-	, playstate(PlayState())
 {
 
 }
@@ -21,7 +20,7 @@ void Demo::Init()
 	graphicObjects->BuildObjects();
 	gsm.screenWidth = screenWidth;
 	gsm.screenHeight = screenHeight;
-	gsm.push(new PlayState());
+	gsm.push(new PlayState(&gsm));
 	gsm.Init();
 	//playstate.Init(screenWidth, screenHeight);
 }

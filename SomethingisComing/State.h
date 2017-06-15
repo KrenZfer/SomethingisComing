@@ -11,13 +11,15 @@
 #include "GraphicObject.h"
 #include "InputHandling.h"
 
+class GameStateManager;
 class State {
 
 public:
-	State() {
+	State(GameStateManager * gsms) {
+		this->gsm = gsms;
 	}
 	virtual ~State() = default;
-
+	GameStateManager* gsm;
 	virtual void Init(unsigned int screenWidth, unsigned int screenHeight) = 0;
 	virtual void Update(float deltaTime) = 0;
 	virtual void Render() = 0;
