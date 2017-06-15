@@ -33,7 +33,7 @@
 using namespace std;
 using namespace glm;
 
-enum class State { RUNNING, EXIT };
+enum class StateWindow { RUNNING, EXIT };
 enum class WindowFlag { WINDOWED, FULLSCREEN, EXCLUSIVE_FULLSCREEN, BORDERLESS };
 
 namespace Engine {
@@ -44,25 +44,6 @@ namespace Engine {
 		~Game();
 		void Start(string title, unsigned int width, unsigned int height, bool vsync, WindowFlag windowFlag, unsigned int targetFrameRate, float timeScale);
 		InputHandling* handling;
-		//// Input Handling
-		//void PressKey(unsigned int keyID);
-		//void ReleaseKey(unsigned int keyID);
-		//void SetMouseCoords(float x, float y);
-		///// Returns true if the key is held down
-		//bool IsKeyDown(unsigned int keyID);
-		///// Returns true if the key was just pressed
-		//bool IsKeyPressed(unsigned int keyID);
-		////getters
-		//vec2 GetMouseCoords() const { return _mouseCoords; }
-		////GameController and joystick
-		//void onEventAxis(int axis, int value);
-		//load .obj
-		/*bool loadObject(const char* path, 
-			vector <vec3> & out_vertices,
-			vector <vec2> & out_uvs, 
-			vector <vec3> & out_normals);
-		GLuint BuildShader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr);
-		void UseShader(GLuint program);*/
 	protected:
 		virtual void Init() = 0;
 		virtual void Update(float deltaTime) = 0;
@@ -73,22 +54,13 @@ namespace Engine {
 		unsigned int lastFrame = 0, last = 0, _fps = 0, fps = 0;
 		float targetFrameTime = 0, timeScale;
 		bool keyOnce;
-		//list<int> releasePtr;
-		State state;
+		StateWindow state;
 		float GetDeltaTime();
 		SDL_GameController* joystick;
 		void GetFPS();
 		void PollInput();
 		void Err(string errorString);
 		void LimitFPS();
-		/*void CheckShaderErrors(GLuint shader, string type);*/
-
-		// Input Handling
-		/// Returns true if the key is held down
-		/*bool WasKeyDown(unsigned int keyID);
-		unordered_map<unsigned int, bool> _keyMap;
-		unordered_map<unsigned int, bool> _previousKeyMap;
-		vec2 _mouseCoords;*/
 	};
 }
 #endif

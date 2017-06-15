@@ -63,6 +63,18 @@
     <ClInclude Include="TextsHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AudioHandling.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Character.cpp">
@@ -101,11 +113,34 @@
     <ClCompile Include="SummonHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TextsHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="lampShader.frag" />
-    <None Include="object.frag" />
-    <None Include="lampShader.vert" />
-    <None Include="object.vert" />
+    <None Include="lampShader.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="lampShader.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="object.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="object.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="font.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="font.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

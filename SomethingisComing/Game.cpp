@@ -82,7 +82,7 @@ void Engine::Game::Start(string windowTitle, unsigned int screenWidth, unsigned 
 	//Set VSYNC
 	SDL_GL_SetSwapInterval(vsync);
 
-	this->state = State::RUNNING;
+	this->state = StateWindow::RUNNING;
 
 	// Init delta time calculation
 	last = SDL_GetTicks();
@@ -90,7 +90,7 @@ void Engine::Game::Start(string windowTitle, unsigned int screenWidth, unsigned 
 	Init();
 
 	//Will loop until we set _gameState to EXIT
-	while (State::RUNNING == state) {
+	while (StateWindow::RUNNING == state) {
 		float deltaTime = GetDeltaTime();
 		GetFPS();
 		PollInput();
@@ -372,7 +372,7 @@ void Engine::Game::PollInput()
 	while (SDL_PollEvent(&evt)) {
 		switch (evt.type) {
 		case SDL_QUIT:
-			state = State::EXIT;
+			state = StateWindow::EXIT;
 			break;
 		case SDL_KEYDOWN:
 			//if (!keyOnce) {

@@ -158,10 +158,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AudioHandling.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Demo.h" />
     <ClInclude Include="Fence.h" />
+    <ClInclude Include="PlayState.h" />
+    <ClInclude Include="GameStateManager.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="TextsHandler.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameStage.h" />
@@ -181,15 +185,20 @@
     <ClCompile Include="Fence.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameStage.cpp" />
+    <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="GraphicHandler.cpp" />
     <ClCompile Include="GraphicObject.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="InputHandling.cpp" />
+    <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="SummonHelper.cpp" />
+    <ClCompile Include="TextsHandler.cpp" />
     <ClCompile Include="Tree.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="font.frag" />
+    <None Include="font.vert" />
     <None Include="lampShader.frag" />
     <None Include="lampShader.vert" />
     <None Include="object.frag" />
