@@ -95,19 +95,19 @@ int GraphicObject::Collision(void *ptr) {
 				powf(chara.charPosition.x - ittree->charPosition.x, 2)
 				+ powf(chara.charPosition.z - ittree->charPosition.z, 2)
 			)
-				<= (chara.radius + ittree->radius)
+				<= (chara.radius + ittree->radius - 0.3f)
 				)) {
 				if (chara.charPosition.x < ittree->charPosition.x) {
-					chara.xpos = -1;
+					chara.pos.x += -1;
 				}
 				else {
-					chara.xpos = 1;
+					chara.pos.x += 1;
 				}
 				if (chara.charPosition.z < ittree->charPosition.z) {
-					chara.zpos = -1;
+					chara.pos.z += -1;
 				}
 				else {
-					chara.zpos = 1;
+					chara.pos.z += 1;
 				}
 			}
 			ittree++;
@@ -120,10 +120,10 @@ int GraphicObject::Collision(void *ptr) {
 			|| chara.charPosition.x >= groundFactorx*lengthPlatform.x - groundFactorx / 2 - 2)
 		) {
 		if (chara.charPosition.x < 0) {
-			chara.xpos = 1;
+			chara.pos.x += 1;
 		}
 		else {
-			chara.xpos = -1;
+			chara.pos.x += -1;
 		}
 	}
 	return 0;
