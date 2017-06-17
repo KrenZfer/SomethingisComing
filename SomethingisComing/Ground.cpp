@@ -28,6 +28,7 @@ void Ground::DrawObject(vec3 Position, Camera camera, vec3 lightPos, unsigned in
 	this->screenHeight = screenHeightchar;
 	this->screenWidth = screenWidthchar;
 	graphHandler.DrawObject(pos, cameraChar, lightPosChar, screenWidth, screenHeight);
+	//cout << charPosition.x << " : " << charPosition.y << " : " << charPosition.z << endl;
 }
 
 void Ground::UpdateObject(Camera camera, vec3 lightPos) {

@@ -18,8 +18,8 @@ GraphicObject::GraphicObject() : chara(Character("Objek/chr_man.objek","Objek/ch
 		Ground("Objek/platformghost.objek", "Objek/platformghost.png"));
 	_fenceList = vector<Fence>(static_cast<unsigned int>(lengthPlatform.y + 2));
 	_treeList = vector<Tree>(static_cast<unsigned int>(_groundList.size()*3));
-	_ghostList = vector<Ghost>(static_cast<unsigned int>(1
-		//_groundGhostList.size()*5
+	_ghostList = vector<Ghost>(static_cast<unsigned int>(
+		_groundGhostList.size()*3
 		), Ghost("Objek/ghost.objek","Objek/ghost.png"));
 	_summonHelper = vector<SummonHelper>(_groundGhostList.size());
 	itground = _groundList.begin();
@@ -42,6 +42,7 @@ void GraphicObject::Init() {
 	posTree = vec3(0.0f,2.0f,0.0f);
 }
 
+//diganti dengan loop diluar build sehingga tetap bisa menggambar loading screen
 void GraphicObject::BuildObjects() {
 	percentComplete = 0;
 	chara.BuildObject();
@@ -76,7 +77,7 @@ void GraphicObject::BuildObjects() {
 			) {
 			buildStageDone = true;
 		}
-		percentComplete += ((float)(1.0f / _ghostList.size() * 100));
+		percentComplete += ((float)(1.0f / _treeList.size() * 100));
 		cout << "Loading " << percentComplete << "%" << endl;
 	}
 	buildStageDone = false;

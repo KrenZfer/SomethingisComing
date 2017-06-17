@@ -35,11 +35,12 @@ private:
 	bool mode;
 	float xpos = 0, zpos = 0, ypos = 0,
 		xposlight = 0, zposlight = 0;
+	float cameraSpeed = 0.002f;
 	unsigned int screenWidth, screenHeight;
 
 	virtual void Input();
 	void UpdateSprite(float deltaTime);
-	void MoveSprite(float deltaTime);
+	void MoveCamera(float deltaTime);
 	void DrawLight();
 	void BuildLight();
 

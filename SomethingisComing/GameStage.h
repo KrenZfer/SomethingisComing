@@ -30,6 +30,9 @@ public:
 
 	int counterSummon;
 	int numDefTree;
+	int numDefGhost;
+	float posTempTree;
+	float posTempGhost;
 
 	vector<int>::iterator itordinary;
 	vector<int>::iterator itspooky;

@@ -6,7 +6,7 @@
 
 using namespace glm;
 
-#define SPEED 1.0f
+#define SPEED 0.5f
 
 class Character 
 	: public ObjectVoxel

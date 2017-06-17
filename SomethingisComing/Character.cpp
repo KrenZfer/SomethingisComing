@@ -8,8 +8,8 @@ Character::Character(char* pathObj, char* pathMaterial)
 	this->pathMaterial = pathMaterial;
 	walk = false;
 	radius = 1.0f;
-	defaultPos = vec3(0.0f,2.0f,20.0f);
-	//charPosition = defaultPos;
+	defaultPos = vec3(15.0f,2.0f,20.0f);
+	charPosition = defaultPos;
 	Forward = vec3(0.0f, 0.0f, 1.0f);
 	directChar = Direction::FRONT;
 }
@@ -29,8 +29,10 @@ void Character::DrawObject(vec3 Position, Camera camera, vec3 lightPos, unsigned
 	pos += Position;
 	screenHeight = screenHeightchar;
 	screenWidth = screenWidthchar;
-	charPosition += pos;
-	cout << charPosition.x << " : " << charPosition.z << endl;
+	if (walk) {
+		charPosition += pos;
+	}
+	//cout << charPosition.x << " : " << charPosition.z << endl;
 	graphHandler.DrawObject(pos, cameraChar, lightPosChar, screenWidth, screenHeight);
 	pos = vec3(0.0f);
 	walk = true;

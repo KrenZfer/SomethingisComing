@@ -41,6 +41,11 @@ public:
 	vec3 posFence;
 	vec3 posGhost;
 
+	float lastPosGround;
+	float LastPosTree;
+	float lastPosFence;
+	float lastPosGhost;
+
 
 	vec2 lengthPlatform;
 	int groundFactorx, groundFactorz;

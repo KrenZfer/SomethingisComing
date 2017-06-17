@@ -23,6 +23,8 @@ public:
 
 	vec3 charPosition;
 	float radius;
+	enum Drawing {DRAW, NONE};
+	Drawing isDraw = Drawing::DRAW;
 protected:
 	GLuint VAOChar;
 	GLuint shaderChar;

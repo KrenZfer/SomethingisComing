@@ -163,6 +163,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Demo.h" />
     <ClInclude Include="Fence.h" />
+    <ClInclude Include="LoadingState.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="State.h" />

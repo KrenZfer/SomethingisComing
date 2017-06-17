@@ -43,7 +43,7 @@ void PlayState::Init(unsigned int screenWidth, unsigned int screenHeight) {
 
 void PlayState::Update(float deltaTime) {
 	Input();
-	MoveSprite(deltaTime);
+	MoveCamera(deltaTime);
 	stage.Update(deltaTime);
 	UpdateSprite(deltaTime);
 	graphicObjects->Collision((void *)NULL);
@@ -65,12 +65,13 @@ void PlayState::Input() {
 void PlayState::UpdateSprite(float deltaTime)
 {
 	camera.Position = cameraPos;
+	//cout << camera.Position.x << " : " << camera.Position.z << endl;
 	camera.Pitch = pitch;
 	camera.Yaw = yaw;
 	camera.updateCameraVectors();
 }
 
-void PlayState::MoveSprite(float deltaTime)
+void PlayState::MoveCamera(float deltaTime)
 {
 	if ((handling->IsKeyPressed(AXIS_X_LEFT)
 		|| handling->IsKeyPressed(SDLK_a))
@@ -88,10 +89,11 @@ void PlayState::MoveSprite(float deltaTime)
 	}
 	if ((handling->IsKeyPressed(AXIS_Y_UP)
 		|| handling->IsKeyPressed(SDLK_w))
-		&& false
+		//&& false
+		&& stage.graphic->chara.charPosition.z - camera.Position.z >= 25
 		) {
-		zpos += (SPEED / 2);
-		zposlight += (SPEED / 2);
+		zpos += (SPEED);
+		zposlight += (SPEED);
 	}
 	if ((handling->IsKeyPressed(AXIS_Y_DOWN)
 		|| handling->IsKeyPressed(SDLK_s))
@@ -125,8 +127,8 @@ void PlayState::MoveSprite(float deltaTime)
 		cout << xpos << ", " << ypos << ", " << zpos << ", " << yaw << ", " << pitch << endl;
 	}
 	if (mode) {
-	zpos += deltaTime * (0.002f);
-	zposlight += deltaTime * (0.002f);
+	zpos += deltaTime * (cameraSpeed);
+	zposlight += deltaTime * (cameraSpeed);
 	}
 	cameraPos.z = zpos;
 	cameraPos.x = xpos;
