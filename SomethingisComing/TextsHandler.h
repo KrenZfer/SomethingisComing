@@ -32,7 +32,7 @@ private:
 		GLuint Advance; // Offset to advance to next glyph
 	};
 
-	const char* FONTNAME;
+	const char* FONTNAMETEXT;
 	int FONTSIZE;
 	string TEXT;
 	GLfloat xPosText, yPosText, scaleText;

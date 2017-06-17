@@ -22,7 +22,7 @@ class GraphicHandler {
 public:
 	GraphicHandler();
 	~GraphicHandler();
-	GLuint VAO, VBO, buffervertexs, bufferuvs, buffernormals, texture;
+	GLuint VAO, VBO, EBO, buffervertexs, bufferuvs, buffernormals, texture;
 	GLuint shader;
 	Camera camera;
 	vec3 lightPos;
@@ -39,7 +39,9 @@ public:
 		vector <vec2> & out_uvs,
 		vector <vec3> & out_normals);
 	void BuildObject(char* pathShaderVert, char* pathShaderFrag, char* pathOBJ, char* pathMaterial);
+	void BuildObject(char* pathTexture);
 	void DrawObject(vec3 Position, Camera camera, vec3 lightPos, unsigned int screenWidth, unsigned int screenHeight);
+	void DrawObject(vec3 Position);
 private:
 	void CheckShaderErrors(GLuint shader, string type);
 };

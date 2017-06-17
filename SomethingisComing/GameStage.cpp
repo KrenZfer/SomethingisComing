@@ -13,7 +13,7 @@ GameStage::GameStage()
 	posTempTree = 0.0f;
 	graphic->posTree.x = 0.0f;
 	graphic->posGhost.x = -30.0f;
-	posTempGhost = graphic->groundFactorz * 2;
+	posTempGhost = static_cast<float>(graphic->groundFactorz * 2);
 }
 
 GameStage::~GameStage() {

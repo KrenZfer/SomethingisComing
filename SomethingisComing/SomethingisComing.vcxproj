@@ -164,6 +164,7 @@
     <ClInclude Include="Demo.h" />
     <ClInclude Include="Fence.h" />
     <ClInclude Include="LoadingState.h" />
+    <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="State.h" />
@@ -192,6 +193,8 @@
     <ClCompile Include="GraphicObject.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="InputHandling.cpp" />
+    <ClCompile Include="LoadingState.cpp" />
+    <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="SummonHelper.cpp" />
     <ClCompile Include="TextsHandler.cpp" />
@@ -204,6 +207,8 @@
     <None Include="lampShader.vert" />
     <None Include="object.frag" />
     <None Include="object.vert" />
+    <None Include="sprite.frag" />
+    <None Include="sprite.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

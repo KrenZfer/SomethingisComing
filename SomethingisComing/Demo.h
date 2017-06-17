@@ -13,6 +13,7 @@
 #include "GraphicObject.h"
 #include "GameStateManager.h"
 #include "PlayState.h"
+#include "LoadingState.h"
 
 using namespace glm;
 
@@ -27,8 +28,6 @@ public:
 	virtual void Render();
 private:
 	GameStateManager gsm;
-	//singleton pointer
-	GraphicObject * graphicObjects;
 };
 #endif
 

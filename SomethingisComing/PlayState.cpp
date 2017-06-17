@@ -23,7 +23,7 @@ void PlayState::Init(unsigned int screenWidth, unsigned int screenHeight) {
 	camera = Camera(cameraPos, cameraEye, yaw, pitch);
 	glEnable(GL_DEPTH_TEST);
 	mode = false;
-	textHandler.InitFont(20, "fonts/UpheavalPro.ttf");
+	textHandler.InitFont(20, FONTNAME);
 	//Setting viewport
 	this->screenWidth = screenWidth;
 	this->screenHeight = screenHeight;

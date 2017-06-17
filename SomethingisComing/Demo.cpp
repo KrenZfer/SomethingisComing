@@ -1,13 +1,11 @@
 #include "Demo.h"
 
 Demo::Demo() 
-	: graphicObjects(GraphicObject::getInstance())
-	, gsm(GameStateManager())
+	: gsm(GameStateManager())
 {
-	gsm.push(new PlayState(&gsm));
+	//gsm.push(new PlayState(&gsm));
+	gsm.push(new LoadingState(&gsm));
 }
-
-GraphicObject * GraphicObject::_instance;
 
 Demo::~Demo()
 {
@@ -16,8 +14,6 @@ Demo::~Demo()
 
 void Demo::Init()
 {
-	graphicObjects->Init();
-	graphicObjects->BuildObjects();
 	gsm.screenWidth = screenWidth;
 	gsm.screenHeight = screenHeight;
 	gsm.Init();
@@ -39,7 +35,7 @@ void Demo::Render()
 int main(int argc, char** argv) {
 
 	Engine::Game &game = Demo();
-	game.Start("Draw Cube", 800, 600, true, WindowFlag::WINDOWED, 0, 1);
+	game.Start(GAMENAME, 800, 600, true, WindowFlag::WINDOWED, 0, 1);
 
 	return 0;
 }

@@ -36,7 +36,6 @@ private:
 	float xpos = 0, zpos = 0, ypos = 0,
 		xposlight = 0, zposlight = 0;
 	float cameraSpeed = 0.002f;
-	unsigned int screenWidth, screenHeight;
 
 	virtual void Input();
 	void UpdateSprite(float deltaTime);

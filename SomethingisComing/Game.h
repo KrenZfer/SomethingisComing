@@ -30,6 +30,9 @@
 #define AXIS_X_RIGHT 156
 #define AXIS_X_LEFT 178
 
+#define FONTNAME "fonts/fixedsys-excelsior.ttf"
+#define GAMENAME "SOMETHING'S COMING"
+
 using namespace std;
 using namespace glm;
 

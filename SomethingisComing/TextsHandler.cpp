@@ -7,7 +7,7 @@ TextstHandler::TextstHandler(){
 TextstHandler::~TextstHandler(){}
 
 void TextstHandler::InitFont(int fontsizes, const char* fontnames) {
-	this->FONTNAME = fontnames;
+	this->FONTNAMETEXT = fontnames;
 	this->FONTSIZE = fontsizes;
 	// Init Freetype
 	FT_Library ft;
@@ -15,7 +15,7 @@ void TextstHandler::InitFont(int fontsizes, const char* fontnames) {
 		Err("ERROR::FREETYPE: Could not init FreeType Library");
 	}
 	FT_Face face;
-	if (FT_New_Face(ft, FONTNAME, 0, &face)) {
+	if (FT_New_Face(ft, FONTNAMETEXT, 0, &face)) {
 		Err("ERROR::FREETYPE: Failed to load font");
 	}
 

@@ -19,7 +19,10 @@ public:
 		this->gsm = gsms;
 	}
 	virtual ~State() = default;
+
 	GameStateManager* gsm;
+	unsigned int screenWidth, screenHeight;
+
 	virtual void Init(unsigned int screenWidth, unsigned int screenHeight) = 0;
 	virtual void Update(float deltaTime) = 0;
 	virtual void Render() = 0;

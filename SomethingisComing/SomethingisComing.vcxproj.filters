@@ -78,6 +78,9 @@
     <ClInclude Include="LoadingState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MainMenuState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Character.cpp">
@@ -125,6 +128,12 @@
     <ClCompile Include="GameStateManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LoadingState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="lampShader.frag">
@@ -143,6 +152,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="font.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="sprite.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="sprite.vert">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
