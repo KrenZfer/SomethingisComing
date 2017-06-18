@@ -45,10 +45,13 @@ public:
 	bool IsKeyDown(unsigned int keyID);
 	/// Returns true if the key was just pressed
 	bool IsKeyPressed(unsigned int keyID);
+	bool IsKeyRelease(unsigned int keyID);
 	//getters
 	vec2 GetMouseCoords() const { return _mouseCoords; }
 	//GameController and joystick
 	void onEventAxis(int axis, int value);
+	void countering();
+	bool keyOnce;
 
 private:
 	list<int> releasePtr;
@@ -58,8 +61,10 @@ private:
 	bool WasKeyDown(unsigned int keyID);
 	unordered_map<unsigned int, bool> _keyMap;
 	unordered_map<unsigned int, bool> _previousKeyMap;
+	unordered_map<unsigned int, bool> _pressedKey;
 	vec2 _mouseCoords;
-	bool keyOnce;
+	int counter;
+	unsigned int keyRelease;
 };
 
 #endif // !_H_INPUT_HANDLING_H_

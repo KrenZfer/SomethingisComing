@@ -7,7 +7,7 @@ Ghost::Ghost(char* pathObject, char* pathMaterial) {
 	graphHandler = GraphicHandler();
 	defaultPos = vec3(0.0f, 2.0f, 0.0f);
 	pos = defaultPos;
-	radius = 1.5f;
+	radius = 2.5f;
 	currentPos = defaultPos;
 	forward = vec3(-1.0f, 0.0f, 0.0f);
 	speed = 0.007f;

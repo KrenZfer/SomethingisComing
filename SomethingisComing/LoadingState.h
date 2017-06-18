@@ -4,6 +4,9 @@
 #include "State.h"
 #include "TextsHandler.h"
 #include "GraphicObject.h"
+#include "MainMenuState.h"
+#include "PlayState.h"
+#include <thread>
 #include <SDL/SDL_thread.h>
 
 class LoadingState
@@ -24,17 +27,19 @@ public:
 	vec3 colorText;
 	vec3 temp;
 
+	GraphicHandler background;
+	GraphicObject * graphicObject;
+
 	int counter;
 
 	virtual void Init(unsigned int screenWidth, unsigned int screenHeight);
 	virtual void Update(float deltaTime);
 	virtual void Render();
-	static int MyThread(void* data);
+	void ThreadMe();
+	//static int MyThread(void* data);
 private:
 	virtual void Input();
 };
-
-static GraphicObject * graphicObject = GraphicObject::getInstance();
 
 #endif // !_H_LOADING_STATE_H_
 

@@ -8,6 +8,12 @@ GameStateManager::~GameStateManager() {}
 
 void GameStateManager::push(State* state) {
 	states.push_back(unique_ptr<State>(state));
+	Init();
+}
+
+void GameStateManager::push(State * state, int data)
+{
+	states.push_back(unique_ptr<State>(state));
 }
 
 void GameStateManager::pop() {
@@ -17,6 +23,7 @@ void GameStateManager::pop() {
 void GameStateManager::set(State* state) {
 	states.pop_back();
 	states.push_back(unique_ptr<State>(state));
+	Init();
 }
 
 void GameStateManager::Init() {

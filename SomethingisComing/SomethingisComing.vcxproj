@@ -165,8 +165,10 @@
     <ClInclude Include="Fence.h" />
     <ClInclude Include="LoadingState.h" />
     <ClInclude Include="MainMenuState.h" />
+    <ClInclude Include="PauseState.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="GameStateManager.h" />
+    <ClInclude Include="PowerUp.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="TextsHandler.h" />
     <ClInclude Include="Game.h" />
@@ -182,6 +184,7 @@
     <ClInclude Include="Tree.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AudioHandling.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Demo.cpp" />
     <ClCompile Include="Fence.cpp" />
@@ -195,7 +198,9 @@
     <ClCompile Include="InputHandling.cpp" />
     <ClCompile Include="LoadingState.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
+    <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="PlayState.cpp" />
+    <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="SummonHelper.cpp" />
     <ClCompile Include="TextsHandler.cpp" />
     <ClCompile Include="Tree.cpp" />

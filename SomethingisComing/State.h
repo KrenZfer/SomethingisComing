@@ -26,8 +26,6 @@ public:
 	virtual void Init(unsigned int screenWidth, unsigned int screenHeight) = 0;
 	virtual void Update(float deltaTime) = 0;
 	virtual void Render() = 0;
-
-protected:
 	virtual void Input() = 0;
 };
 

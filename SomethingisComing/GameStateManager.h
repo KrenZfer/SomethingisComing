@@ -18,6 +18,7 @@ public:
 	unsigned int screenWidth, screenHeight;
 
 	void push(State* state);
+	void push(State* state, int data);
 	void pop();
 	void set(State* state);
 	void Init();

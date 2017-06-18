@@ -12,6 +12,9 @@ Character::Character(char* pathObj, char* pathMaterial)
 	charPosition = defaultPos;
 	Forward = vec3(0.0f, 0.0f, 1.0f);
 	directChar = Direction::FRONT;
+	HP = 3;
+	STAMINA = 3;
+	DEAD = false;
 }
 
 Character::~Character() {
@@ -36,6 +39,18 @@ void Character::DrawObject(vec3 Position, Camera camera, vec3 lightPos, unsigned
 	graphHandler.DrawObject(pos, cameraChar, lightPosChar, screenWidth, screenHeight);
 	pos = vec3(0.0f);
 	walk = true;
+	if (invincible > 0) {
+		invincible--;
+	}
+	if (HP <= 0) {
+		DEAD = true;
+	}
+	if (counterStamina >= 2000) {
+		STAMINA--;
+		counterStamina = 0;
+	}
+	counterStamina++;
+	//cout << counterStamina << endl;
 }
 
 void Character::UpdateObject(Camera camera, vec3 lightPos) {
@@ -52,8 +67,35 @@ int Character::calculateRotationFactor(Direction current, Direction goal) {
 	}
 }
 
+void Character::takeDamage() {
+	if (invincible == 0) {
+		HP--;
+		cout << "Kena Damage : " << HP << endl;
+		invincible = 100;
+	}
+}
+
+void Character::staminaPowerUp()
+{
+	if (STAMINA < 3) {
+		STAMINA++;
+	}
+	cout << "Tambah Stamina" << endl;
+}
+
+void Character::healthPowerUp()
+{
+	if (HP < 3) {
+		HP++;
+		cout << "Tambah HP" << endl;
+	}
+}
+
 void Character::MoveCharacter(float deltaTime)
 {
+	if (charPosition.z < cameraChar.Position.z - 5) {
+		HP = 0;
+	}
 	int factor = 0;
 	if (input->IsKeyPressed(AXIS_X_LEFT)
 		||input->IsKeyPressed(SDLK_a)) {
@@ -62,8 +104,9 @@ void Character::MoveCharacter(float deltaTime)
 			graphHandler.RMatrix = rotate(graphHandler.RMatrix, radians(factor*90.0f), vec3(0.0f, 1.0f, 0.0f));
 			Forward = rotate(Forward, radians(factor*90.0f), vec3(0.0f, 1.0f, 0.0f));
 		}
-		pos += Forward * (SPEED);
+		pos += Forward * (SPEED) * static_cast<float>(STAMINA) / 3.0f;
 		directChar = LEFT;
+		cout << charPosition.z << endl;
 	}
 	if (input->IsKeyPressed(AXIS_X_RIGHT)
 		|| input->IsKeyPressed(SDLK_d)) {
@@ -72,8 +115,9 @@ void Character::MoveCharacter(float deltaTime)
 			graphHandler.RMatrix = rotate(graphHandler.RMatrix, radians(factor*90.0f), vec3(0.0f, 1.0f, 0.0f));
 			Forward = rotate(Forward, radians(factor*90.0f), vec3(0.0f, 1.0f, 0.0f));
 		}
-		pos += Forward * (SPEED);
+		pos += Forward * (SPEED) * static_cast<float>(STAMINA) / 3.0f;
 		directChar = RIGHT;
+		cout << charPosition.z << endl;
 	}
 	if (input->IsKeyPressed(AXIS_Y_UP)
 		|| input->IsKeyPressed(SDLK_w)) {
@@ -82,8 +126,9 @@ void Character::MoveCharacter(float deltaTime)
 			graphHandler.RMatrix = rotate(graphHandler.RMatrix, radians(factor*90.0f), vec3(0.0f, 1.0f, 0.0f));
 			Forward = rotate(Forward, radians(factor*90.0f), vec3(0.0f, 1.0f, 0.0f));
 		}
-		pos += Forward * (SPEED);
+		pos += Forward * (SPEED) * static_cast<float>(STAMINA)/3.0f;
 		directChar = FRONT;
+		cout << charPosition.z << endl;
 	}
 	if ((input->IsKeyPressed(AXIS_Y_DOWN)
 		|| input->IsKeyPressed(SDLK_s)) && charPosition.z >= defaultPos.z) {
@@ -92,8 +137,9 @@ void Character::MoveCharacter(float deltaTime)
 			graphHandler.RMatrix = rotate(graphHandler.RMatrix, radians(factor*90.0f), vec3(0.0f, 1.0f, 0.0f));
 			Forward = rotate(Forward, radians(factor*90.0f), vec3(0.0f, 1.0f, 0.0f));
 		}
-		pos += Forward * (SPEED);
+		pos += Forward * (SPEED) * static_cast<float>(STAMINA) / 3.0f;
 		directChar = BACK;
+		cout << charPosition.z << endl;
 	}
 	if ((input->IsKeyPressed(BTN_RECTANGLE))) {
 		cout << charPosition.x << ", " << charPosition.z << endl;

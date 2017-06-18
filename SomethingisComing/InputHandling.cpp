@@ -1,6 +1,9 @@
 #include "InputHandling.h"
 
-InputHandling::InputHandling(){}
+InputHandling::InputHandling(){
+	counter = 0;
+	keyOnce = true;
+}
 InputHandling::~InputHandling(){}
 
 void InputHandling::onEventAxis(int axis, int value) {
@@ -43,19 +46,33 @@ void InputHandling::PressKey(unsigned int keyID) {
 	// Here we are treating _keyMap as an associative array.
 	// if keyID doesn't already exist in _keyMap, it will get added
 	_keyMap[keyID] = true;
-	//cout << "ID : " << keyID << endl;
-	/*SDL_Delay(200);
-	_keyMap[keyID] = false;*/
 }
 
 void InputHandling::ReleaseKey(unsigned int keyID) {
 	_keyMap[keyID] = false;
+
 }
 
 void InputHandling::SetMouseCoords(float x, float y) {
 	_mouseCoords.x = x;
 	_mouseCoords.y = y;
 }
+
+bool InputHandling::IsKeyRelease(unsigned int keyID) {
+	auto it = _pressedKey.find(keyID);
+	bool temp;
+	if (it != _pressedKey.end()) {
+		// Found the key
+		temp = it->second;
+		_pressedKey[keyID] = false;
+	}
+	else {
+		// Didn't find the key
+		temp = false;
+	}
+	return temp;
+}
+
 
 bool InputHandling::IsKeyDown(unsigned int keyID) {
 	// We dont want to use the associative array approach here

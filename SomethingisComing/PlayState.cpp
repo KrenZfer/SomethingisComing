@@ -8,7 +8,7 @@ PlayState::PlayState(GameStateManager * gsm)
 	, pitch(-44)
 	, lightPos(10.0f, 30.0f, 30.0f)
 	, stage(GameStage())
-	, graphicObjects(GraphicObject::getInstance())
+	, graphic(GraphicObject::getInstance())
 	, textHandler(TextstHandler())
 	, State(gsm)
 {
@@ -46,7 +46,7 @@ void PlayState::Update(float deltaTime) {
 	MoveCamera(deltaTime);
 	stage.Update(deltaTime);
 	UpdateSprite(deltaTime);
-	graphicObjects->Collision((void *)NULL);
+	graphic->Collision((void *)NULL);
 }
 
 void PlayState::Render() {
@@ -69,6 +69,9 @@ void PlayState::UpdateSprite(float deltaTime)
 	camera.Pitch = pitch;
 	camera.Yaw = yaw;
 	camera.updateCameraVectors();
+	if (stage.graphic->chara.DEAD) {
+		gsm->push(new PauseState(gsm, "You're A Dead Man!!!"));
+	}
 }
 
 void PlayState::MoveCamera(float deltaTime)
@@ -102,6 +105,9 @@ void PlayState::MoveCamera(float deltaTime)
 		) {
 		zpos -= (SPEED / 2);
 		zposlight -= (SPEED / 2);
+	}
+	if ((handling->IsKeyPressed(SDLK_ESCAPE))) {
+		gsm->push(new PauseState(gsm));
 	}
 	if (handling->IsKeyPressed(BTN_CROSS)
 		) {

@@ -22,13 +22,20 @@ public :
 	vec3 pos;
 	vec3 defaultPos;
 	vec3 Forward;
+	int HP, STAMINA;
+	int counterStamina;
+	int invincible;
 	Direction directChar = FRONT;
 	int counterWalk;
+	bool DEAD;
 	void BuildObject();
 	void DrawObject(vec3 Position, Camera camera, vec3 lightPos, unsigned int screenWidthchar, unsigned int screenHeightchar);
 	void UpdateObject(Camera camera, vec3 lightPos);
 	void MoveCharacter(float deltaTime);
 	int calculateRotationFactor(Direction current, Direction goal);
+	void takeDamage();
+	void staminaPowerUp();
+	void healthPowerUp();
 };
 
 #endif // !CHARACTER_H

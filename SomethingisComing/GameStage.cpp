@@ -14,6 +14,8 @@ GameStage::GameStage()
 	graphic->posTree.x = 0.0f;
 	graphic->posGhost.x = -30.0f;
 	posTempGhost = static_cast<float>(graphic->groundFactorz * 2);
+	HPCheck.InitFont(20, FONTNAME);
+	StaminaCheck.InitFont(20, FONTNAME);
 }
 
 GameStage::~GameStage() {
@@ -29,13 +31,23 @@ void GameStage::DrawStage(Camera camera, vec3 lightPos, unsigned int screenWidth
 	int limiterGround = static_cast<int>(graphic->lengthPlatform.y / 2) - numGround;
 	int limiterGroundGhost = static_cast<int>(graphic->lengthPlatform.y / 2) - numGroundGhost;
 	int lengthCounter = 0;
+	counterHealthInterface = 0;
+	counterMeatInterface = 0;
 	graphic->itground = graphic->_groundList.begin();
 	graphic->itfence = graphic->_fenceList.begin();
 	graphic->ittree = graphic->_treeList.begin();
 	graphic->itgroundghost = graphic->_groundGhostList.begin();
 	graphic->itghost = graphic->_ghostList.begin();
+	graphic->itmeat = graphic->_meat3D.begin();
+	graphic->ithealth = graphic->_health3D.begin();
+	graphic->ithealthInterface = graphic->_healthInterface.begin();
+	graphic->itmeatInterface = graphic->_meatInterface.begin();
 	buildStageDone = false;
 	int counterGround = 0;
+	string textHP = "HP : "
+		, textStamina = "STAMINA : ";
+	textHP.append(to_string(graphic->chara.HP));
+	textStamina.append(to_string(graphic->chara.STAMINA));
 	while (!buildStageDone) {
 		counterSummon++;
 		if (graphic->itground != graphic->_groundList.end() 
@@ -113,6 +125,7 @@ void GameStage::DrawStage(Camera camera, vec3 lightPos, unsigned int screenWidth
 				graphic->posGround = vec3(0.0f);
 			}
 		}
+
 		if (graphic->itfence != graphic->_fenceList.end()) {
 			if (counterFence >= 2 && !drawStageDone) {
 				graphic->posFence.z += graphic->groundFactorx;
@@ -172,6 +185,7 @@ void GameStage::DrawStage(Camera camera, vec3 lightPos, unsigned int screenWidth
 			}
 			++graphic->ittree;
 		}
+
 		if (graphic->itghost != graphic->_ghostList.end() && graphic->itgroundghost == graphic->_groundGhostList.end()) {
 			numDefGhost += 6;
 			if (counterGhost >= 6 && itspooky != spookyGround.end()) {
@@ -206,24 +220,94 @@ void GameStage::DrawStage(Camera camera, vec3 lightPos, unsigned int screenWidth
 			}
 			++graphic->itghost;
 		}
+
+		if (graphic->ithealth != graphic->_health3D.end()) {
+			if (!graphic->ithealth->deploy) {
+				srand((unsigned int)counterSummon);
+				posHealth.x = static_cast<float>(rand() % 50);
+				srand((unsigned int)counterSummon/2);
+				posHealth.z = static_cast<float>(rand() % 50 + graphic->lastPosHealth);
+				graphic->lastPosHealth += 400;
+				cout << "health Power Up Deploy" << endl;
+				//cout << posHealth.x << " : " << posHealth.z << endl;
+			}
+			graphic->ithealth->DrawObject(posHealth, camera, lightPos, screenWidth, screenHeight);
+			if (!graphic->ithealth->deploy) {
+				graphic->ithealth->deploy = true;
+			}
+			if (graphic->ithealth->Position.z < camera.Position.z - 50) {
+				graphic->ithealth->deploy = false;
+			}
+			++graphic->ithealth;
+		}
+
+		if (graphic->itmeat != graphic->_meat3D.end()) {
+			if (!graphic->itmeat->deploy) {
+				srand((unsigned int)counterSummon / 3 + 5);
+				posMeat.x = rand() % 50;
+				srand((unsigned int)counterSummon / 4);
+				posMeat.z = rand() % 50 + graphic->lastPosMeat;
+				graphic->lastPosMeat += 600;				
+				cout << "Stamina Power Up Deploy" << endl;
+				//cout << posMeat.x << " : " << posMeat.z << endl;
+			}
+			graphic->itmeat->DrawObject(posMeat, camera, lightPos, screenWidth, screenHeight);
+			if (!graphic->itmeat->deploy) {
+				graphic->itmeat->deploy = true;
+			}
+			if (graphic->itmeat->Position.z < camera.Position.z - 50) {
+				graphic->itmeat->deploy = false;
+			}
+			++graphic->itmeat;
+		}
+
+		if (graphic->ithealthInterface != graphic->_healthInterface.end()) {
+			if (!drawStageDone) {
+				graphic->ithealthInterface->TMatrix = translate(graphic->ithealthInterface->TMatrix
+					, vec3(20.0f + (counterHealthInterface*20.0f), screenHeight - 25.0f, 0.0f));
+			}
+			if (counterHealthInterface < graphic->chara.HP) {
+				graphic->ithealthInterface->DrawObject(vec3(0.0f), screenWidth, screenHeight);
+			}
+			counterHealthInterface++;
+			++graphic->ithealthInterface;
+		}
+		if (graphic->itmeatInterface != graphic->_meatInterface.end()) {
+			if (!drawStageDone) {
+				graphic->itmeatInterface->TMatrix = translate(graphic->itmeatInterface->TMatrix
+					, vec3(screenWidth - (counterMeatInterface*20.0f), screenHeight - 25.0f, 0.0f));
+			}
+			if (counterMeatInterface < graphic->chara.STAMINA) {
+				graphic->itmeatInterface->DrawObject(vec3(0.0f), screenWidth, screenHeight);
+			}
+			counterMeatInterface++;
+			++graphic->itmeatInterface;
+		}
+
 		if (
 			graphic->itground == graphic->_groundList.end()
 			&& graphic->itfence == graphic->_fenceList.end()
 			&& graphic->ittree == graphic->_treeList.end()
 			&& graphic->itgroundghost == graphic->_groundGhostList.end()
 			&& graphic->itghost == graphic->_ghostList.end()
+			&& graphic->ithealth == graphic->_health3D.end()
+			&& graphic->itmeat == graphic->_meat3D.end()
 			) {
 			buildStageDone = true;
 		}
 	}
 
 	graphic->chara.DrawObject(posChara, camera, lightPos, screenWidth, screenHeight);
+	HPCheck.Render(textHP, 25.0f, static_cast<GLfloat>(screenHeight) - 25.0f, 1.0f, vec3(1.0f), screenWidth, screenHeight);
+	StaminaCheck.Render(textStamina, static_cast<GLfloat>(screenWidth) - 150.0f, static_cast<GLfloat>(screenHeight) - 25.0f, 1.0f, vec3(1.0f), screenWidth, screenHeight);
 
 	drawStageDone = true;
 	graphic->posGround = vec3(0.0f);
 	graphic->posFence = vec3(0.0f);
 	graphic->posTree = vec3(0.0f);
 	graphic->posGhost = vec3(0.0f);
+	posMeat = vec3(0.0f);
+	posHealth = vec3(0.0f);
 	posChara = vec3(0.0f);
 }
 

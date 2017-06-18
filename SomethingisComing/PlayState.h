@@ -2,6 +2,7 @@
 #define _H_PLAY_STATE_H
 
 #include "State.h"
+#include "PauseState.h"
 #include <SDL/SDL.h>
 
 using namespace glm;
@@ -27,7 +28,7 @@ private:
 	GLfloat yaw, pitch;
 	TextstHandler textHandler;
 	//singleton pointer
-	GraphicObject * graphicObjects;
+	GraphicObject * graphic;
 	InputHandling* handling;
 	//Game Stage
 	GameStage stage;

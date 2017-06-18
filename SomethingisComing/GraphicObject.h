@@ -7,6 +7,7 @@
 #include "Character.h"
 #include "Ghost.h"
 #include "SummonHelper.h"
+#include "PowerUp.h"
 
 class GraphicObject {
 
@@ -33,26 +34,39 @@ public:
 	vector<Tree> _treeList;
 	vector<Ghost> _ghostList;
 	vector<SummonHelper> _summonHelper;
+	vector<PowerUp> _health3D;
+	vector<PowerUp> _meat3D;
 	Character chara;
+
+	GraphicHandler ButtonPlay, ButtonCredit, ButtonExit, ButtonYes, ButtonNo;
+	GraphicHandler Background, pointer, pointer2;
+	vector<GraphicHandler> _meatInterface;
+	vector<GraphicHandler> _healthInterface;
 
 	vec3 posGround;
 	vec3 posTree;
 	vec3 posChara;
 	vec3 posFence;
 	vec3 posGhost;
+	vec3 posmeatInterface;
+	vec3 posheartInterface;
 
 	float lastPosGround;
 	float LastPosTree;
 	float lastPosFence;
 	float lastPosGhost;
+	float lastPosHealth;
+	float lastPosMeat;
 
 
 	vec2 lengthPlatform;
 	int groundFactorx, groundFactorz;
 	int randZ;
+	float tambah;
 	float percentComplete;
 
 	bool buildStageDone;
+	bool once;
 
 	vector<Ground>::iterator itground;
 	vector<Fence>::iterator itfence;
@@ -60,6 +74,10 @@ public:
 	vector<Ground>::iterator itgroundghost;
 	vector<Ghost>::iterator itghost;
 	vector<SummonHelper>::iterator itsummon;
+	vector<GraphicHandler>::iterator itmeatInterface;
+	vector<GraphicHandler>::iterator ithealthInterface;
+	vector<PowerUp>::iterator itmeat;
+	vector<PowerUp>::iterator ithealth;
 
 	void setGrounds(vector<Ground> groundList) { _groundList = groundList; }
 	void setFences(vector<Fence> fenceList) { _fenceList = fenceList; }

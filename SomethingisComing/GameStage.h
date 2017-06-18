@@ -7,6 +7,9 @@
 #include "Fence.h"
 #include "Character.h"
 #include "GraphicObject.h"
+#include "TextsHandler.h"
+
+using namespace std;
 
 class GameStage {
 
@@ -21,6 +24,11 @@ public:
 	vec3 posTree;
 	vec3 posChara;
 	vec3 posGhost;
+	vec3 posHealth;
+	vec3 posMeat;
+	int counterHealthInterface;
+	int counterMeatInterface;
+
 	vector<int> spookyGround;
 	vector<int> ordinaryGround;
 	bool buildStageDone;
@@ -33,6 +41,8 @@ public:
 	int numDefGhost;
 	float posTempTree;
 	float posTempGhost;
+
+	TextstHandler HPCheck, StaminaCheck;
 
 	vector<int>::iterator itordinary;
 	vector<int>::iterator itspooky;

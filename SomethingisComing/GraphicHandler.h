@@ -32,6 +32,7 @@ public:
 	vector<vec2> uvsObject;
 	mat4 TMatrix, RMatrix, SMatrix;
 	mat4 model, view, projection;
+	float widthObject, heightObject;
 	GLuint BuildShader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr);
 	void UseShader(GLuint program);
 	bool loadObject(const char* path,
@@ -41,7 +42,7 @@ public:
 	void BuildObject(char* pathShaderVert, char* pathShaderFrag, char* pathOBJ, char* pathMaterial);
 	void BuildObject(char* pathTexture);
 	void DrawObject(vec3 Position, Camera camera, vec3 lightPos, unsigned int screenWidth, unsigned int screenHeight);
-	void DrawObject(vec3 Position);
+	void DrawObject(vec3 Position, unsigned int screenWidth, unsigned int screenHeight);
 private:
 	void CheckShaderErrors(GLuint shader, string type);
 };

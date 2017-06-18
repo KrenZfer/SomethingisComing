@@ -266,8 +266,8 @@ void GraphicHandler::BuildObject(char* pathShaderVert, char* pathShaderFrag, cha
 
 void GraphicHandler::BuildObject(char* pathTexture){
 	this->shader = BuildShader("sprite.vert", "sprite.frag");
-
-	// Load and create a texture 
+	UseShader(this->shader);
+	// Load and create a texture
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture); // All upcoming GL_TEXTURE_2D operations now have effect on our texture object
 
@@ -278,20 +278,21 @@ void GraphicHandler::BuildObject(char* pathTexture){
 	int width, height;
 
 	unsigned char* image = SOIL_load_image(pathTexture, &width, &height, 0, SOIL_LOAD_RGBA);
-
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture when done, so we won't accidentily mess up our texture.
 
-									// Set up vertex data (and buffer(s)) and attribute pointers
-	float x = static_cast<float>(width / height);
-	float y = 1.0f;
+									 // Set up vertex data (and buffer(s)) and attribute pointers
+	widthObject = static_cast<float>(width);
+	heightObject = static_cast<float>(height);
+	float x = static_cast<float>(width / 2);
+	float y = static_cast<float>(height / 2);
 	GLfloat vertices[] = {
 		// Positions   // Colors           // Texture Coords
 		x,  y, 0.0f,   1.0f, 1.0f, 1.0f,   1.0f, 1.0f, // Top Right
 		x, -y, 0.0f,   1.0f, 1.0f, 1.0f,   1.0f, 0.0f, // Bottom Right
 		-x, -y, 0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 0.0f, // Bottom Left
-		-x,  y, 0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 1.0f  // Top Left 
+		-x,  y, 0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 1.0f  // Top Left
 	};
 
 	GLuint indices[] = {  // Note that we start from 0!
@@ -324,7 +325,7 @@ void GraphicHandler::BuildObject(char* pathTexture){
 	glBindVertexArray(0); // Unbind VAO
 }
 
-void GraphicHandler::DrawObject(vec3 Position) {
+void GraphicHandler::DrawObject(vec3 Position, unsigned int screenWidth, unsigned int screenHeight) {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -335,11 +336,15 @@ void GraphicHandler::DrawObject(vec3 Position) {
 	// Activate shader
 	UseShader(this->shader);
 
+	mat4 projection = ortho(-(float)screenWidth/2, (float)screenWidth/2, -(float)screenHeight/2, (float)screenHeight/2);
+	GLint projectionLoc = glGetUniformLocation(this->shader, "projection");
+
 	GLint modelLoc = glGetUniformLocation(this->shader, "model");
 	TMatrix = translate(TMatrix, Position);
-	model = TMatrix * RMatrix * SMatrix;
+	model = TMatrix * SMatrix;
 
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, value_ptr(model));
+	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, value_ptr(projection));
 	// Draw sprite
 	glBindVertexArray(VAO);
 	glDrawElements(GL_QUADS, 4, GL_UNSIGNED_INT, 0);

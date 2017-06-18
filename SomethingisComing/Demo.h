@@ -14,6 +14,8 @@
 #include "GameStateManager.h"
 #include "PlayState.h"
 #include "LoadingState.h"
+#include "MainMenuState.h"
+#include "AudioHandling.h"
 
 using namespace glm;
 
@@ -23,6 +25,10 @@ class Demo  :
 public:
 	Demo();
 	~Demo();
+
+	//GraphicObject * graphicObject;
+	AudioHandling audioMusic;
+
 	virtual void Init();
 	virtual void Update(float deltaTime);
 	virtual void Render();
