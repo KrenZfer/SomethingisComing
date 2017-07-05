@@ -2,7 +2,7 @@
 Final Project for Game Programming Course using C++. it made from SDL2, GLEW, SOIL, and GLM.
 
 ## ROLE
-  - uhammad Dikri Robinsyah (145150201111060) Graphic Programmer
+  - Muhammad Dikri Robinsyah (145150201111060) Graphic Programmer
   - Mohammad Chaliffilardhy S. (145150200111049) Graphic Programmer
   - Arvin Adam Dakhota (145150201111126) UI Programmer
   - Rizal Darmawansyah (145150201111058) Gameplay Programmer
